@@ -1,44 +1,43 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Locadora {
+public class Locadora {
+
     private List<Veiculo> frota;
 
-    public Locadora() {
+    public Locadora(){
         this.frota = new ArrayList<>();
     }
 
-    public void adicionarVeiculo(Veiculo v) {
-        frota.add(v);
+    public void addVeiculo(Veiculo veiculo){
+        frota.add(veiculo);
     }
 
-    public void listarFrota() {
-        System.out.println("\n========== FROTA DISPONÍVEL ==========");
+    public List<Veiculo> getFrota(){
+        return frota;
+    }
+
+    public void listarVeiculo(){
         for (int i = 0; i < frota.size(); i++) {
             Veiculo v = frota.get(i);
-            System.out.printf("  [%d] %-30s | Diária: R$ %.2f%n", (i + 1), v, v.calcularDiaria());
+
+            System.out.printf("[%d] %s | Diária: R$%.2f\n", (i + 1), v.exibirDados(), v.calcularDiaria());
         }
-        System.out.println("======================================\n");
+        System.out.println("===========================");
     }
 
-    public Veiculo getVeiculo(int indice) {
-        return frota.get(indice);
-    }
+    public void aluguelVeiculo(int dias, int idVeiculo){
 
-    public int tamanhoFrota() {
-        return frota.size();
-    }
+        // Implementar a lógica para alugar carro/moto.
+        Veiculo v = frota.get(idVeiculo);
 
-    public void alugar(int escolhaVeiculo, int dias) {
-
-        Veiculo v = frota.get(escolhaVeiculo - 1);
         double total = v.calcularDiaria() * dias;
 
-        System.out.println("\n-------- RESUMO DO ALUGUEL --------");
-        System.out.println("Veículo: " + v);
-        System.out.printf("Diária:  R$ %.2f%n", v.calcularDiaria());
-        System.out.println("Dias:    " + dias);
-        System.out.printf("TOTAL:   R$ %.2f%n", total);
-        System.out.println("-----------------------------------");
+        System.out.println(" ===== RESUMO DO ALUGUEL ====");
+        System.out.println("Veículo: " + v.exibirDados());
+        System.out.println("Período: " + dias + " dias");
+        System.out.printf("Valor diário: R$%.2f", v.calcularDiaria());
+        System.out.printf("\nTotal: R$%.2f", total);
     }
+
 }

@@ -1,37 +1,37 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        // Criando veículos
-        Carro carro1 = new Carro("Toyota", "Corolla", 2023, 150.0, 4);
-        Carro carro2 = new Carro("Fiat", "Uno", 2020, 80.0, 2);
-        Moto moto1  = new Moto("Honda", "CB 500", 2022, 100.0, 500);
-        Moto moto2  = new Moto("Yamaha", "Factor", 2021, 60.0, 150);
+//        Carro carro1 = new Carro("Porsche", "Cayenne", 2027, "ABC1B34", 2350, 4);
+//        Moto moto1 = new Moto("Suzuki", "Hayabusa", 2005, "DYG-2146", 190, 1000);
 
-        // Testando encapsulamento — valor negativo é barrado
-//        System.out.println(">> Tentando setar preço negativo no Corolla:");
-//        carro1.setPrecoBase(-50);
-//        System.out.println("   Preço continua: R$ " + carro1.getPrecoBase());
-//        System.out.println();
+//        System.out.println(carro1.exibirDados());
+//        System.out.println(moto1.exibirDados());
 
-        // Montando a frota da locadora (polimorfismo)
         Locadora locadora = new Locadora();
-        locadora.adicionarVeiculo(carro1);
-        locadora.adicionarVeiculo(carro2);
-        locadora.adicionarVeiculo(moto1);
-        locadora.adicionarVeiculo(moto2);
-        locadora.adicionarVeiculo(carro1);
-        locadora.listarFrota();
 
-        System.out.print("Escolha o veículo (1 a " + locadora.tamanhoFrota() + "): ");
-        int escolha = sc.nextInt();
+        locadora.addVeiculo(new Carro("Toyota", "Corolla", 2023, "ABC-123", 480, 4));
+        locadora.addVeiculo(new Carro("Honda", "Civic", 2022, "DEF-456", 520, 4));
+        locadora.addVeiculo(new Carro("Chevrolet", "Onix", 2021,"GHI-789", 220, 4));
 
-        System.out.print("Quantos dias vai ficar com o veículo? ");
+        locadora.addVeiculo(new Moto("Honda", "Biz", 2022,"JKL-987", 100, 110));
+        locadora.addVeiculo(new Moto("Yamaha", "Factor", 2023,"MNO-654", 130, 150));
+        locadora.addVeiculo(new Moto("Suzuki", "Yes", 2021, "PQR-321", 140, 125));
+
+        locadora.listarVeiculo();
+
+        int tamanho = locadora.getFrota().size();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Escolha o veículo de 1 a " + tamanho + ": ");
+        int veiculoSelecionado = sc.nextInt();
+
+        System.out.print("Quantidade de dias: ");
         int dias = sc.nextInt();
 
-        locadora.alugar(escolha, dias);
+        locadora.aluguelVeiculo(dias, (veiculoSelecionado - 1));
 
-        System.out.println();
     }
 }
